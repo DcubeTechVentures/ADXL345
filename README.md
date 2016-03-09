@@ -50,7 +50,7 @@ Compile and upload the code on Arduino IDE and see the output on Serial Monitor.
 
 ## Particle Photon
 
-Login to your Photon and setup your device according to steps provided at
+Login to your Photon and setup your device according to steps provided at:
 
 https://docs.particle.io/guide/getting-started/connect/photon/
 
