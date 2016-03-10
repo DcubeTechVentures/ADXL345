@@ -24,45 +24,45 @@ void setup()
   // Initialise serial communication, set baud rate = 9600
   Serial.begin(9600);
 
-  // Begin transmission with given device on I2C bus
+  // Start I2C transmission
   Wire.beginTransmission(Addr);
   // Select bandwidth rate register
   Wire.write(0x2C);
   // Select output data rate = 100 Hz
   Wire.write(0x0A);
-  // End transmission and release I2C bus
+  // Stop I2C Transmission
   Wire.endTransmission();
 
-  // Begin transmission with given device on I2C bus
+  // Start I2C transmission
   Wire.beginTransmission(Addr);
   // Select power control register
   Wire.write(0x2D);
   // Select auto sleep disable
   Wire.write(0x08);
-  // End transmission and release I2C bus
+  // Stop I2C transmission
   Wire.endTransmission();
 
-  // Begin transmission with given device on I2C bus
+  // Start I2C transmission
   Wire.beginTransmission(Addr);
   // Select data format register
   Wire.write(0x31);
   // Select full resolution, +/-2g
   Wire.write(0x08);
-  // End transmission and release I2C bus
+  // End I2C transmission
   Wire.endTransmission();
   delay(300);
 }
 
 void loop()
 {
-  int data[6];
+  unsigned int data[6];
   for(int i = 0; i < 6; i++)
   {
-    // Begin transmission with given device on I2C bus
+    // Start I2C transmission
     Wire.beginTransmission(Addr);
     // Select data register
     Wire.write((50+i));
-    // End transmission and release I2C bus
+    // Stop I2C transmission
     Wire.endTransmission();
 
     // Request 1 byte of data from the device
@@ -76,23 +76,21 @@ void loop()
   delay(300);
   }
 
-  // Convert the data
-  xAccl = ((data[1] & 0xFF) * 256) + (data[0] & 0xFF);
-  if (xAccl > 32767)
+  // Convert the data to 10-bits
+  int xAccl = (((data[1] & 0x03) * 256) + data[0]);
+  if(xAccl > 511)
   {
-    xAccl -= 65536;
+    xAccl -= 1024;
   }
-
-  yAccl = ((data[3] & 0xFF) * 256) + (data[2] & 0xFF);
-  if (yAccl > 32767)
+  int yAccl = (((data[3] & 0x03) * 256) + data[2]);
+  if(yAccl > 511)
   {
-    yAccl -= 65536;
+    yAccl -= 1024;
   }
-
-  zAccl = ((data[5] & 0xFF) * 256) + (data[4] & 0xFF);
-  if (zAccl > 32767)
+  int zAccl = (((data[5] & 0x03) * 256) + data[4]);
+  if(zAccl > 511)
   {
-    zAccl -= 65536;
+    zAccl -= 1024;
   }
 
   // Output data to dashboard
