@@ -85,7 +85,7 @@ void loop()
     zAccl -= 1024;
   }
   
-  // Output data to screen
+  // Output data to serial monitor
   Serial.print("Acceleration in X-Axis is : ");
   Serial.println(xAccl);
   Serial.print("Acceleration in Y-Axis is : ");
