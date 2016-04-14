@@ -62,4 +62,14 @@ Verify and flash the code on your Photon. Code output is shown in logs at dashbo
 
 https://dashboard.particle.io/user/logs
 
+Download (or git pull) the code in Beaglebone Black.
+
+Compile the c program.
+```cpp
+$>gcc ADXL345.c -o ADXL345
+```
+Run the c program.
+```cpp
+$>./ADXL345
+```
 #####The code output is raw value of acceleration in X, Y and Z Axis.
