@@ -4,7 +4,6 @@
 // This code is designed to work with the ADXL345_I2CS I2C Mini Module available from ControlEverything.com.
 // https://www.controleverything.com/content/Accelorometer?sku=ADXL345_I2CS#tabs-0-product_tabset-2
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <linux/i2c-dev.h>
@@ -23,7 +22,6 @@ void main()
 	}
 	// Get I2C device, ADXL345 I2C address is 0x53(83)
 	ioctl(file, I2C_SLAVE, 0x53);
-	
 
 	// Select Bandwidth rate register(0x2C)
 	// Normal mode, Output data rate = 100 Hz(0x0A)
