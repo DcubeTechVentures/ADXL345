@@ -49,6 +49,7 @@ void main()
 	if(read(file, data, 6) != 6)
 	{
 		printf("Erorr : Input/output Erorr \n");
+		exit(1);
 	}
 	else
 	{
